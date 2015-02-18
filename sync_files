@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mutt_to=~/.muttrc
+#mutt_to=~/.muttrc
 vimrc_to=~/.vimrc
 tmux_to=~/.tmux.conf
 bashrc_to=~/.bashrc
@@ -9,7 +9,7 @@ gitconfig_to=~/.gitconfig
 vim_bundles_to=~/.vim/bundles/bundles.sh
 
 d=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-mutt_from=$d/.muttrc
+#mutt_from=$d/.muttrc
 vimrc_from=$d/.vimrc
 tmux_from=$d/tmux-config/.tmux.conf
 bashrc_from=$d/.bashrc
@@ -18,12 +18,14 @@ gitconfig_from=$d/.gitconfig
 vim_bundles_from=$d/bundles.sh
 
 sync_to() {
-	ln -s ${1}_from ${1}_to
+	eval to=\$${1}_to
+	eval from=\$${1}_from
+	ln -s ${from} ${to}
 }
 
 sync_from() {
-	to=${1}_to
-	from=${1}_from
+	eval to=\$${1}_to
+	eval from=\$${1}_from
 	if [[ ! -f ${from} ]]
 	then
 		cp ${to} ${from}
@@ -31,7 +33,7 @@ sync_from() {
 }
 
 init_sync_from() {
-	sync_from mutt
+	# sync_from mutt
 	sync_from vimrc
 	sync_from tmux
 	sync_from bashrc
@@ -41,7 +43,7 @@ init_sync_from() {
 }
 
 init_sync_to() {
-	sync_to mutt
+	# sync_to mutt
 	sync_to vimrc
 	sync_to tmux
 	sync_to bashrc
@@ -62,3 +64,4 @@ get_bundles() {
 	done
 }
 
+# init_sync_from

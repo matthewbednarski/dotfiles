@@ -6,7 +6,9 @@ get_bundles() {
 	file=$(pwd)/${1}
 	echo "#!/bin/bash" > ${file}
 	echo -e "\n" >> ${file}
+	echo 'mkdir -p ~/.vim/bundle' >> ${file}
 	echo 'cdold=$(pwd)' >> ${file}
+	echo 'cd ~/.vim/bundle' >> ${file}
 	bundle_dir=~/.vim/bundle
 	for d in $( cd $bundle_dir && dir)
 	do 
@@ -21,12 +23,13 @@ get_bundles() {
 		echo "git clone $url" >> ${file}
 		if [[ -f $bundle_dir/$d/.gitmodules ]]
 		then
-			echo "cd $dname" >> ${file}
+			echo "cd ~/.vim/bundle/$dname" >> ${file}
 			echo "git submodule update --init --recursive" >> ${file}
-			echo 'cd $cdold' >> ${file}
+			echo 'cd ~/.vim/bundle' >> ${file}
 		fi
 		cd $dold
 	done
+			echo 'cd $cdold' >> ${file}
 }
 get_bundles ${1}
 # chmod +x ${1}
