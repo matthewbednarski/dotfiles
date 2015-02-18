@@ -1,0 +1,43 @@
+#!/bin/bash
+
+
+
+get_bundles() {
+	file=$(pwd)/${1}
+	echo "#!/bin/bash" > ${file}
+	echo -e "\n" >> ${file}
+	echo 'cdold=$(pwd)' >> ${file}
+	bundle_dir=~/.vim/bundle
+	for d in $( cd $bundle_dir && dir)
+	do 
+		dold=$(pwd)
+		cd $bundle_dir/$d
+		url=$(git remote -v |grep -i fetch | sed s/\(fetch\)//g |sed -e "s/^origin\s\+//g") 
+		dname=$(echo $url | sed -e 's/.*\/\([a-zA-Z._-]\+\)$/\1/g')
+		dname=$(echo $dname | sed -e 's/\.git$//g')
+		echo $dname   $url
+		echo -e "\n" >> ${file}
+		echo '# ' "$d" >> ${file}
+		echo "git clone $url" >> ${file}
+		if [[ -f $bundle_dir/$d/.gitmodules ]]
+		then
+			echo "cd $dname" >> ${file}
+			echo "git submodule update --init --recursive" >> ${file}
+			echo 'cd $cdold' >> ${file}
+		fi
+		cd $dold
+	done
+}
+get_bundles ${1}
+# chmod +x ${1}
+
+git_clone() {
+	git clone ${1}
+}
+git_submodule_init() {
+	dold=$(pwd)
+	cd ${1}
+	git submodule update --init --recursive
+	cd ${dold}
+}
+
