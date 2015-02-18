@@ -1,0 +1,11 @@
+#!/bin/bash
+
+mutt=~/.muttrc
+vimrc=~/.vimrc
+tmux=~/.tmux.conf
+bashrc=~/.bashrc
+bash_aliases=~/.bash_aliases
+gitconfig=~/.gitconfig
+
+
+
