@@ -22,6 +22,10 @@ git clone git://github.com/altercation/vim-colors-solarized.git
 git clone git://github.com/elzr/vim-json 
 
 
+#  XML-Folding
+git clone git://github.com/vim-scripts/XML-Folding 
+
+
 #  matchit
 git clone git://github.com/tmhedberg/matchit 
 
@@ -34,8 +38,8 @@ git clone ssh://git@github.com/majutsushi/tagbar
 git clone ssh://git@github.com/embear/vim-foldsearch 
 
 
-#  vim-surround
-git clone ssh://git@github.com/tpope/vim-surround 
+#  vim-pathogen
+git clone git://github.com/tpope/vim-pathogen.git 
 
 
 #  nerdtree
@@ -50,8 +54,8 @@ git clone ssh://git@github.com/tomtom/tcomment_vim
 git clone ssh://git@github.com/tpope/vim-fugitive 
 
 
-#  vim-xml
-git clone ssh://git@github.com/matthewbednarski/vim-xml 
+#  vim-surround
+git clone ssh://git@github.com/tpope/vim-surround 
 
 
 #  supertab
@@ -69,6 +73,6 @@ git submodule update --init --recursive
 cd ~/.vim/bundle
 
 
-#  xml-folding
-git clone git://github.com/vim-scripts/XML-Folding 
+#  vim-xml
+git clone ssh://git@github.com/matthewbednarski/vim-xml 
 cd $cdold
