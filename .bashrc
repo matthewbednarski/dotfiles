@@ -42,7 +42,7 @@ MAIL=/var/spool/mail/matthew && export MAIL
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
 for file in /etc/bash_completion.d/* ; do
-    source "$file"
+	source "$file"
 done
 
 # History Options
@@ -61,7 +61,11 @@ done
 
 # Aliases
 if [ -f "${HOME}/.bash_aliases" ]; then
-  source "${HOME}/.bash_aliases"
+	source "${HOME}/.bash_aliases"
+fi
+# Functions
+if [ -f "${HOME}/.bash_functions" ]; then
+	source "${HOME}/.bash_functions"
 fi
 # Umask
 #
@@ -75,7 +79,7 @@ fi
 #
 # Some people use a different file for functions
 if [ -f "${HOME}/.bash_functions" ]; then
-  source "${HOME}/.bash_functions"
+	source "${HOME}/.bash_functions"
 fi
 
 if [[ $PATH != ?(*:)$HOME/bin?(:*) ]]; then
@@ -89,10 +93,35 @@ fi
 
 # Set PATH so it includes user's private bin if it exists
 if [ -d "${HOME}/solinfo-dev/bin" ] ; then
-  PATH="${HOME}/solinfo-dev/bin:${PATH}"
+	PATH="${HOME}/solinfo-dev/bin:${PATH}"
 fi
 if [ -f "${HOME}/.java7_envrc" ] ; then
 	source "${HOME}/.java7_envrc"
 fi
+# DEFAULT="[37;40m"
+# PINK="[35;40m"
+# GREEN="[32;40m"
+# ORANGE="[33;40m"
+#
+# hg_dirty() {
+# 	is_dirty=$(hg status 2> /dev/null )
+# 	if [[ $is_dirty != "" ]]; then
+# 		echo "*"
+# 	fi
+# }
+#
+# hg_branch() {
+# 	hg branch 2> /dev/null | awk '{ printf "["$1"]" }' 
+# 	hg bookmarks 2> /dev/null | awk '/\*/ { printf "[@" $2 "]" }'
+# 	hg_dirty
+# }
+# parse_git_dirty() {
+# 	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+# }
+# parse_git_branch() {
+# 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+# }
+# export PS1='\u@\h \[\033[1;33m\]\w\[\033[0m\]$(parse_git_branch)$(hg_branch)$ ' 
 
+source ~/.svcps1rc
 export SUDO_EDITOR=/usr/bin/vim
