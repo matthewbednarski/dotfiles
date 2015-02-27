@@ -1,10 +1,6 @@
 
 set wildmode=longest,list,full
 set wildmenu
-nnoremap <C-n> :bNext<CR>
-nnoremap <C-p> :bPrevious<CR>
-nnoremap <F5>  :e<CR> G
-
 "g:my_vim_dir is used elsewhere in my vim configurations
 let g:my_vim_dir=expand("$HOME/.vim")
 
@@ -20,9 +16,7 @@ if has("win16") || has("win32") || has("win64") "add g:my_vim_dir to the front o
 	"pathogen#infect() is called.  So it is very important to add the above
 	"'after' folder.
 	"(This applies to vim plugins such as snipmate, tabularize, etc.. that
-	" are loaded by pathogen (and perhaps vundle too.))
-
-	" Not necessary, but I like to cleanup &rtp to use \ instead of /
+	" are loaded by pathogen (and perhaps vundle too.)) " Not necessary, but I like to cleanup &rtp to use \ instead of /
 	" when on windows machines
 	let &rtp=substitute(&rtp,"[/]","\\","g")
 
@@ -40,7 +34,6 @@ filetype plugin indent on
 
 execute pathogen#infect()
 
-nnoremap F gg=G''zz
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -50,6 +43,9 @@ let g:solarized_termtrans=1
 let g:solarized_termcolors=16
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 let g:syntastic_json_checkers = ['jshint']
 
@@ -63,10 +59,6 @@ colorschem solarized
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 
-let mapleader=","
-inoremap jj <ESC>
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
 let g:xml_syntax_folding=1
 "au FileType xml setlocal foldmethod=syntax
 
@@ -96,14 +88,27 @@ set mouse=a
 cmap w!! w !sudo tee % >/dev/null
 
 call togglebg#map("<F6>")
-
+nnoremap <F2> :TagbarToggle<CR>
 nnoremap <F3> :set hlsearch!<CR>
+nnoremap <F5>  :e<CR> G
+
+nnoremap F gg=G''zz
+
+nnoremap <C-n> :bNext<CR>
+nnoremap <C-p> :bPrevious<CR>
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-R> <C-W><C-R>
+
+let mapleader=","
+inoremap jj <ESC>
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 autocmd FileType json noremap <buffer>  <c-f> :call JsonBeautify()<cr>
-autocmd FileType json noremap <buffer>  <c-f> :call JsonBeautify()<cr>
-
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" for html
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
