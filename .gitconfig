@@ -3,11 +3,12 @@
 	name = Matthew Bednarski
 [core]
 	excludesfile = /home/ekr/.gitignore
-  fileMode = false
+	fileMode = false
+	editor = vim
 [file]
 	mode = false
 [push]
-  default = tracking
+	default = tracking
 [color]
 	ui = auto
 [format]
@@ -19,22 +20,22 @@
 	br = branch
 	co = checkout
 	df = diff
-  dl = diff --name-only --diff-filter=U
+	dl = diff --name-only --diff-filter=U
 	lg = log -p
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	llol = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	lt = log --graph --oneline --all
 	d = difftool
-  pu = push
-  pl = pull
-  mt = mergetool
+	pu = push
+	pl = pull
+	mt = mergetool
 [diff]
 	tool = vimdiff
 [merge]
 	tool = vimdiff3
-  conflictsyle = diff3
+	conflictsyle = diff3
 [mergetool]
-  prompt = false
+	prompt = false
 	keepBackup = false
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"

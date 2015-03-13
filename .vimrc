@@ -4,8 +4,6 @@ set wildmenu
 "g:my_vim_dir is used elsewhere in my vim configurations
 let g:my_vim_dir=expand("$HOME/.vim")
 
-"$HOME/.vim and $HOME/.vim/after are in the &rtp on unix
-"But on windows, they need to be added.  
 if has("win16") || has("win32") || has("win64") "add g:my_vim_dir to the front of the runtimepath execute "set rtp^=".g:my_vim_dir
 	"add g:my_vim_dir\after to the end of the runtimepath
 	execute "set rtp+=".g:my_vim_dir."\\after"
@@ -20,9 +18,6 @@ if has("win16") || has("win32") || has("win64") "add g:my_vim_dir to the front o
 	" when on windows machines
 	let &rtp=substitute(&rtp,"[/]","\\","g")
 
-	"On windows, if called from cygwin or msys, the shell needs to be changed 
-	"to cmd.exe to work with certain plugins that expect cmd.exe on windows versions   
-	"of vim.
 	if &shell=~#'bash$'
 		set shell=$COMSPEC " sets shell to correct path for cmd.exe
 	endif
@@ -101,7 +96,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap <C-R> <C-W><C-R>
 nnoremap <silent> <Leader>= :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
