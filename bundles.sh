@@ -83,6 +83,7 @@ git clone ssh://git@github.com/junegunn/vim-easy-align
 git clone ssh://git@github.com/tpope/vim-surround 
 
 #  todo.txt-vim
-git clone ssh://git@github.com/freitass/todo.txt-vim.git 
+# git clone ssh://git@github.com/freitass/todo.txt-vim.git 
+git clone ssh://git@github.com/dbeniamine/todo.txt-vim.git 
 
 cd $cdold
