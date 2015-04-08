@@ -76,7 +76,13 @@ git clone git://github.com/edkolev/tmuxline.vim
 #  vim-fugitive
 git clone ssh://git@github.com/tpope/vim-fugitive 
 
+#  vim-easy-align
+git clone ssh://git@github.com/junegunn/vim-easy-align 
 
 #  vim-surround
 git clone ssh://git@github.com/tpope/vim-surround 
+
+#  todo.txt-vim
+git clone ssh://git@github.com/freitass/todo.txt-vim.git 
+
 cd $cdold
