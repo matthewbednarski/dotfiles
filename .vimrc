@@ -6,7 +6,7 @@ let g:my_vim_dir=expand("$HOME/.vim")
 
 if has("win16") || has("win32") || has("win64") "add g:my_vim_dir to the front of the runtimepath execute "set rtp^=".g:my_vim_dir
 	"add g:my_vim_dir\after to the end of the runtimepath
-	execute "set rtp+=".g:my_vim_dir."\\after"
+	execute "set rtp+=".g:my_vim_dir
 	"Note, pathogen#infect() looks for the 'bundle' folder in each path
 	"of the &rtp, where the last dir in the '&rtp path' is not 'after'. The
 	"<path>\bundle\*\after folders will be added if and only if
@@ -18,49 +18,42 @@ if has("win16") || has("win32") || has("win64") "add g:my_vim_dir to the front o
 	" when on windows machines
 	let &rtp=substitute(&rtp,"[/]","\\","g")
 
-	if &shell=~#'bash$'
-		set shell=$COMSPEC " sets shell to correct path for cmd.exe
-	endif
+	" set shell=powershell
+	" set shellcmdflag=-command
+	" if &shell=~#'bash$'
+	set shell=$COMSPEC " sets shell to correct path for cmd.exe
+	" endif
+	syntax on
+	filetype plugin indent on
+
+	execute pathogen#infect()
+	set clipboard=unnamed
+	set t_Co=16
+	let g:solarized_termtrans=1
+	let g:solarized_termcolors=16
+	let g:solarized_contrast="high"
+	let g:solarized_visibility="high"
+
+	let g:solarized_underline=0
+else
+	syntax on
+	filetype plugin indent on
+
+	execute pathogen#infect()
+	set clipboard=unnamedplus
+	set t_Co=256
+	let g:solarized_termtrans=1
+	let g:solarized_termcolors=16
+	let g:solarized_contrast="high"
+	let g:solarized_visibility="high"
+
+	let g:airline#extensions#tabline#enabled = 1
+	let g:airline_powerline_fonts = 1
+
 endif
-
-syntax on
-filetype plugin indent on
-
-
-execute pathogen#infect()
-
-
-set omnifunc=syntaxcomplete#Complete
-
-let g:superTabDefaultCompletionType = "context"
-
-let g:solarized_termtrans=1
-let g:solarized_termcolors=16
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-let g:syntastic_json_checkers = ['jshint']
-
-set t_Co=256
-set background=dark " dark | light "
-if has('gui_running')
-	set guioptions-=m
-	set guioptions-=T
-end
-colorschem solarized
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
-
-let g:xml_syntax_folding=1
-"au FileType xml setlocal foldmethod=syntax
 
 set nowrap
 set tabstop=4
-"set clipboard=unnamed
-set clipboard=unnamedplus
 set backspace=indent,eol,start
 set autoindent
 set copyindent
@@ -79,6 +72,32 @@ set title
 set nobackup
 set noswapfile
 set mouse=a
+
+
+set omnifunc=syntaxcomplete#Complete
+
+let g:superTabDefaultCompletionType = "context"
+
+let g:syntastic_json_checkers = ['jshint']
+
+set background=dark " dark | light "
+if has('gui_running')
+	set guioptions-=m
+	set guioptions-=T
+	if has("gui_gtk2")
+		set guifont=Inconsolata\ 12
+	elseif has("gui_macvim")
+		set guifont=Menlo\ Regular:h14
+	elseif has("gui_win32")
+		set guifont=Consolas:h11:cANSI
+	endif
+end
+colorschem solarized
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
+
+let g:xml_syntax_folding=1
+
 
 cmap w!! w !sudo tee % >/dev/null
 
