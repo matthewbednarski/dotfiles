@@ -1,34 +1,40 @@
 [user]
-	email = matthew.bednarski@ekr.it
+	email = matthew.bednarski@solinfo.it
 	name = Matthew Bednarski
 [core]
-	excludesfile = /home/ekr/.gitignore
-	fileMode = false
+	excludesfile = ~/.gitignore
 	editor = vim
+	trustctime = false
+	filemode = false
 [file]
 	mode = false
 [push]
-	default = tracking
+	default = matching
 [color]
 	ui = auto
 [format]
 	suffix = .txt
 [alias]
-	st = status
+	st = status -sb
 	ci = commit
 	ca = commit -a
 	br = branch
+	cp = cherry-pick
 	co = checkout
+	cl = clone
 	df = diff
 	dl = diff --name-only --diff-filter=U
-	lg = log -p
+	dc = diff --cached
+	d = difftool
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	llol = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	lt = log --graph --oneline --all
-	d = difftool
 	pu = push
 	pl = pull
 	mt = mergetool
+	last = log -1 --stat
+	unstage = reset HEAD --
 [diff]
 	tool = vimdiff
 [merge]
@@ -41,3 +47,11 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool "vimdiff3"]
 	cmd = vim -f -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+[credential]
+	helper = cache --timeout=3600
+[mergetool]
+	keeptemporaries = false
+	keepbackups = false
+	prompt = false
+	trustexitcode = false
+

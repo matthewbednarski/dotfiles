@@ -1,57 +1,65 @@
+set nocompatible
+set noundofile
+set encoding=utf-8
 
 set wildmode=longest,list,full
 set wildmenu
 "g:my_vim_dir is used elsewhere in my vim configurations
 let g:my_vim_dir=expand("$HOME/.vim")
 
-if has("win16") || has("win32") || has("win64") "add g:my_vim_dir to the front of the runtimepath execute "set rtp^=".g:my_vim_dir
-	"add g:my_vim_dir\after to the end of the runtimepath
+if has("win16") || has("win32") || has("win64") 
+	"add g:my_vim_dir to the front of the runtimepath 
+	"execute "set rtp^=".g:my_vim_dir
 	execute "set rtp+=".g:my_vim_dir
-	"Note, pathogen#infect() looks for the 'bundle' folder in each path
-	"of the &rtp, where the last dir in the '&rtp path' is not 'after'. The
-	"<path>\bundle\*\after folders will be added if and only if
-	"the corresponding <path>\after folder is in the &rtp before
-	"pathogen#infect() is called.  So it is very important to add the above
-	"'after' folder.
-	"(This applies to vim plugins such as snipmate, tabularize, etc.. that
-	" are loaded by pathogen (and perhaps vundle too.)) " Not necessary, but I like to cleanup &rtp to use \ instead of /
-	" when on windows machines
 	let &rtp=substitute(&rtp,"[/]","\\","g")
 
 	" set shell=powershell
 	" set shellcmdflag=-command
 	" if &shell=~#'bash$'
-	set shell=$COMSPEC " sets shell to correct path for cmd.exe
-	" endif
-	syntax on
-	filetype plugin indent on
 
-	execute pathogen#infect()
+	set shell=$COMSPEC " sets shell to correct path for cmd.exe
+	
 	set clipboard=unnamed
 	set t_Co=16
-	let g:solarized_termtrans=1
-	let g:solarized_termcolors=16
-	let g:solarized_contrast="high"
-	let g:solarized_visibility="high"
-
-	let g:solarized_underline=0
+elseif has("win32unix")
+	set clipboard=unnamed
+	set t_Co=256
 else
-	syntax on
-	filetype plugin indent on
-
-	execute pathogen#infect()
 	set clipboard=unnamedplus
 	set t_Co=256
-	let g:solarized_termtrans=1
-	let g:solarized_termcolors=16
-	let g:solarized_contrast="high"
-	let g:solarized_visibility="high"
-
-	let g:airline#extensions#tabline#enabled = 1
-	let g:airline_powerline_fonts = 1
-
 endif
 
+syntax on
+filetype plugin indent on
+
+execute pathogen#infect()
+
+let g:solarized_termtrans=1
+if has("win16") || has("win32") || has("win64") 
+	let g:solarized_termcolors=16
+elseif has("win32unix")
+	let g:solarized_termcolors=16
+else
+	let g:solarized_termcolors=16
+endif
+let g:solarized_contrast="high" 
+let g:solarized_visibility="high"
+let g:solarized_underline=0
+
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+
+" let g:airline#extensions#tmuxline#enabled = 0
+colorscheme solarized
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
 set nowrap
 set tabstop=4
 set backspace=indent,eol,start
@@ -85,14 +93,14 @@ if has('gui_running')
 	set guioptions-=m
 	set guioptions-=T
 	if has("gui_gtk2")
-		set guifont=Inconsolata\ 12
+		set guifont=Monospace\ Regular\ 12
 	elseif has("gui_macvim")
 		set guifont=Menlo\ Regular:h14
 	elseif has("gui_win32")
 		set guifont=Consolas:h11:cANSI
 	endif
 end
-colorschem solarized
+" colorschem solarized
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 
@@ -119,6 +127,7 @@ nnoremap <silent> <Leader>= :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 let mapleader=","
+let maplocalleader=","
 inoremap jj <ESC>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -127,3 +136,4 @@ autocmd FileType json noremap <buffer>  <c-f> :call JsonBeautify()<cr>
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+autocmd FileType xml noremap <buffer> <c-f> mzgg=G`z<CR>
