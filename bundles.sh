@@ -10,12 +10,12 @@ cd ~/.vim/bundle
 git clone ssh://git@github.com/kien/ctrlp.vim 
 
 
-#  syntastic
-git clone ssh://git@github.com/scrooloose/syntastic 
+#  supertab
+git clone ssh://git@github.com/ervandew/supertab 
 
 
-#  vim-airline
-git clone ssh://git@github.com/bling/vim-airline 
+#  todo.txt-vim
+git clone ssh://git@github.com/dbeniamine/todo.txt-vim.git 
 
 
 #  vim-jsbeautify
@@ -29,12 +29,12 @@ cd ~/.vim/bundle
 git clone ssh://git@github.com/matthewbednarski/vim-xml 
 
 
-#  matchit
-git clone git://github.com/tmhedberg/matchit 
+#  lightline.vim
+git clone git://github.com/itchyny/lightline.vim 
 
 
-#  tagbar
-git clone ssh://git@github.com/majutsushi/tagbar 
+#  syntastic
+git clone ssh://git@github.com/scrooloose/syntastic 
 
 
 #  vim-colors-solarized
@@ -45,7 +45,27 @@ git clone git://github.com/altercation/vim-colors-solarized.git
 git clone git://github.com/elzr/vim-json 
 
 
-#  XML-Folding
+#  Wombat
+git clone git://github.com/vim-scripts/Wombat 
+
+
+#  matchit
+git clone git://github.com/tmhedberg/matchit 
+
+
+#  tagbar
+git clone ssh://git@github.com/majutsushi/tagbar 
+
+
+#  vim-easy-align
+git clone ssh://git@github.com/junegunn/vim-easy-align 
+
+
+#  vim-lawrencium
+git clone git://github.com/ludovicchabant/vim-lawrencium 
+
+
+#  xml-folding
 git clone git://github.com/vim-scripts/XML-Folding 
 
 
@@ -65,8 +85,12 @@ git clone ssh://git@github.com/embear/vim-foldsearch
 git clone git://github.com/tpope/vim-pathogen.git 
 
 
-#  supertab
-git clone ssh://git@github.com/ervandew/supertab 
+#  XML-Folding
+git clone git://github.com/vim-scripts/XML-Folding 
+
+
+#  promptline.vim
+git clone git://github.com/edkolev/promptline.vim 
 
 
 #  tmuxline.vim
@@ -76,14 +100,7 @@ git clone git://github.com/edkolev/tmuxline.vim
 #  vim-fugitive
 git clone ssh://git@github.com/tpope/vim-fugitive 
 
-#  vim-easy-align
-git clone ssh://git@github.com/junegunn/vim-easy-align 
 
 #  vim-surround
 git clone ssh://git@github.com/tpope/vim-surround 
-
-#  todo.txt-vim
-# git clone ssh://git@github.com/freitass/todo.txt-vim.git 
-git clone ssh://git@github.com/dbeniamine/todo.txt-vim.git 
-
 cd $cdold
