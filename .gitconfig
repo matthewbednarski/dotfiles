@@ -6,6 +6,7 @@
 	editor = vim
 	trustctime = false
 	filemode = false
+	fileMode = false
 [file]
 	mode = false
 [push]
