@@ -4,6 +4,7 @@ set encoding=utf-8
 
 set wildmode=longest,list,full
 set wildmenu
+set completeopt=longest,menuone
 "g:my_vim_dir is used elsewhere in my vim configurations
 let g:my_vim_dir=expand("$HOME/.vim")
 
@@ -18,7 +19,7 @@ if has("win16") || has("win32") || has("win64")
 	" if &shell=~#'bash$'
 
 	set shell=$COMSPEC " sets shell to correct path for cmd.exe
-	
+
 	set clipboard=unnamed
 	set t_Co=16
 elseif has("win32unix")
@@ -53,13 +54,13 @@ let g:solarized_underline=0
 colorscheme solarized
 set laststatus=2
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+			\ 'colorscheme': 'solarized',
+			\ 'component': {
+			\   'readonly': '%{&readonly?"":""}',
+			\ },
+			\ 'separator': { 'left': '', 'right': '' },
+			\ 'subseparator': { 'left': '', 'right': '' }
+			\ }
 set nowrap
 set tabstop=4
 set backspace=indent,eol,start
@@ -137,3 +138,16 @@ autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 autocmd FileType xml noremap <buffer> <c-f> mzgg=G`z<CR>
+autocmd FileType java noremap <buffer> <c-f> mzgg=G`z<CR>
+autocmd FileType sh noremap <buffer> <c-f> mzgg=G`z<CR>
+autocmd FileType todo setlocal completefunc=TodoComplete
+autocmd FileType todo imap + +<C-X><C-U>
+autocmd FileType todo imap @ @<C-X><C-U>
+
+
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+			\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+			\ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
