@@ -1,0 +1,85 @@
+
+# Output folders #
+###################
+target/
+bin/
+build/
+classes/
+dist/
+obj/
+old/
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+ 
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.war
+*.ear
+*.rar
+*.tar
+*.zip
+ 
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.db
+*.old
+old/
+data/
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE generated files #
+######################
+.idea/libraries/
+.idea/compiler.xml
+.idea/dbnavigator.xml
+.idea/encodings.xml
+.idea/junitgenerator-prj-settings.xml
+.idea/uiDesigner.xml
+.idea/.name.xml
+.idea/workspace.xml
+.idea/tasks.xml
+
+# Eclipse
+########
+.classpath
+.project
+.settings/
+local.properties
+
+
+# bower
+########
+bower_components/
+
+# VCS
+########
+.svn/
+.hg/
+#.git/
+.cvs/
