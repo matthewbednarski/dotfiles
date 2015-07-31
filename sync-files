@@ -9,6 +9,11 @@ while [[ $# > 0 ]]
 do
 	key="$1"
 	case $key in
+		-i|--install)
+			echo update
+			SYNC_TO=true
+			shift # past argument
+			;;
 		-u|--update)
 			echo update
 			SYNC_TO=true
@@ -40,8 +45,9 @@ gitconfig_to=~/.gitconfig
 editorconf_to=~/.editorconfig
 antigen_to=~/antigen.zsh
 
+wd=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/files
+d=$wd/files
 
-d=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/files
 #mutt_from=$d/.muttrc
 vimrc_from=$d/.vimrc
 conkyrc_from=$d/.conkyrc
@@ -85,13 +91,21 @@ do_sync_from() {
 	sync_from bash_aliases
 	sync_from gitconfig
 	sync_from editorconf
-	if [[ ! -f $d/antigen.zsh ]]; then
-		curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > $d/antigen.zsh
-	fi
 	sync_from antigen
+
+	cdold=$(pwd)
+	cd $wd
+	git add .
+	git commit -a -m "committing latest changes"
+	git push origin master
+	cd $cdold
 }
 
 do_sync_to() {
+	cdold=$(pwd)
+	cd $wd
+	git pull origin master
+	cd $cdold
 	# sync_to mutt
 	sync_to vimrc
 	sync_to conkyrc
@@ -103,6 +117,10 @@ do_sync_to() {
 	sync_to bash_aliases
 	sync_to gitconfig
 	sync_to editorconf
+	if [[ ! -f $d/antigen.zsh ]]; then
+		echo "Downloading antigen.zsh..."
+		curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > $d/antigen.zsh
+	fi
 	sync_to antigen
 }
 
