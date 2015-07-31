@@ -1,0 +1,118 @@
+#!/bin/bash
+# Use > 1 to consume two arguments per pass in the loop (e.g. each
+# argument has a corresponding value to go with it).
+# Use > 0 to consume one or more arguments per pass in the loop (e.g.
+# some arguments don't have a corresponding value to go with it such
+# as in the --default example).
+# note: if this is set to > 0 the /etc/hosts part is not recognized ( may be a bug )
+while [[ $# > 0 ]]
+do
+	key="$1"
+	case $key in
+		-u|--update)
+			echo update
+			SYNC_TO=true
+			shift # past argument
+			;;
+		-c|--commit)
+			echo commit
+			SYNC_FROM=true
+			shift # past argument
+			;;
+		*)
+			# unknown option
+			;;
+	esac
+	shift # past argument or value
+done
+
+
+#mutt_to=~/.muttrc
+vimrc_to=~/.vimrc
+conkyrc_to=~/.conkyrc
+svcps1rc_to=~/.svcps1rc
+tmux_to=~/.tmux.conf
+tmuxconf_to=~/tmux-config/
+tmuxline_to=~/.tmuxline.conf
+bashrc_to=~/.bashrc
+bash_aliases_to=~/.bash_aliases
+gitconfig_to=~/.gitconfig
+editorconf_to=~/.editorconfig
+antigen_to=~/antigen.zsh
+
+
+d=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/files
+#mutt_from=$d/.muttrc
+vimrc_from=$d/.vimrc
+conkyrc_from=$d/.conkyrc
+svcps1rc_from=$d/.svcps1rc
+tmux_from=$d/.tmux.conf
+tmuxconf_from=$d/tmux-config/
+tmuxline_from=$d/.tmuxline.conf
+bashrc_from=$d/.bashrc
+bash_aliases_from=$d/.bash_aliases
+gitconfig_from=$d/.gitconfig
+editorconf_from=$d/.editorconfig
+antigen_from=$d/antigen.zsh
+
+sync_to() {
+	eval to=\$${1}_to
+	eval from=\$${1}_from
+	if [[ ! -d "~/.vim/bundle" ]]; then
+		mkdir -p ~/.vim/bundle
+	fi
+	cp -Rf ${from} ${to}
+}
+
+sync_from() {
+	eval to=\$${1}_to
+	eval from=\$${1}_from
+	if [[ ! -f ${from} ]]
+	then
+		cp ${to} $from}
+	fi
+}
+
+do_sync_from() {
+	# sync_from mutt
+	sync_from vimrc
+	sync_from conkyrc
+	sync_from svcps1rc
+	sync_from tmux
+	sync_from tmuxconf
+	sync_from tmuxline
+	sync_from bashrc
+	sync_from bash_aliases
+	sync_from gitconfig
+	sync_from editorconf
+	if [[ ! -f $d/antigen.zsh ]]; then
+		curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > $d/antigen.zsh
+	fi
+	sync_from antigen
+}
+
+do_sync_to() {
+	# sync_to mutt
+	sync_to vimrc
+	sync_to conkyrc
+	sync_to svcps1rc
+	sync_to tmux
+	sync_to tmuxconf
+	sync_to tmuxline
+	sync_to bashrc
+	sync_to bash_aliases
+	sync_to gitconfig
+	sync_to editorconf
+	sync_to antigen
+}
+
+# init_sync_from
+if [[ $SYNC_FROM ]]; then
+	echo "Syncing from..."
+	do_sync_from
+
+fi
+if [[ $SYNC_TO ]]; then
+	echo "Syncing to..."
+	do_sync_to
+fi

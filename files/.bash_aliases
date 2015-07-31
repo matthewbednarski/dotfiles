@@ -42,3 +42,11 @@ alias gulp-f='cmf && gulp && gulp watch'
 
 alias gmail='mutt -F ~/.muttrc_gmail'
 alias new-alias='vim ~/.bash_aliases'
+alias emacs-gui='/usr/bin/emacs'
+alias emacs='emacs -nw'
+
+alias mutt-gmail='mutt -F ~/.muttrc_gmail'
+
+alias rm-dead-links='find -L . -type l -exec rm -i "{}" +'
+
+

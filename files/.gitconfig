@@ -49,7 +49,7 @@
 [mergetool "vimdiff3"]
 	cmd = vim -f -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 [credential]
-	helper = cache --timeout=3600
+	helper = wincred
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false

@@ -27,12 +27,17 @@ get_bundles() {
 			echo "git submodule update --init --recursive" >> ${file}
 			echo 'cd ~/.vim/bundle' >> ${file}
 		fi
+		if [[ $d == 'vim-pathogen' ]]
+		then
+			echo "mkdir -p ~/.vim/autoload" >> ${file}
+			echo "ln -s ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim" >> ${file}
+		fi
 		cd $dold
 	done
 			echo 'cd $cdold' >> ${file}
 }
 get_bundles ${1}
-# chmod +x ${1}
+chmod +x ${1}
 
 git_clone() {
 	git clone ${1}

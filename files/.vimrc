@@ -3,9 +3,8 @@ set noundofile
 set encoding=utf-8
 
 set wildmode=longest,list,full
-set wildmenu
-set completeopt=longest,menuone
-"g:my_vim_dir is used elsewhere in my vim configurations
+set wildmenu 
+set completeopt=longest,menuone "g:my_vim_dir is used elsewhere in my vim configurations
 let g:my_vim_dir=expand("$HOME/.vim")
 
 if has("win16") || has("win32") || has("win64") 
@@ -137,7 +136,8 @@ autocmd FileType json noremap <buffer>  <c-f> :call JsonBeautify()<cr>
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-autocmd FileType xml noremap <buffer> <c-f> mzgg=G`z<CR>
+" autocmd FileType xml noremap <buffer> <c-f> :silent %!xmllint --format --recover -<CR>
+autocmd FileType xml noremap <buffer> <c-f> :silent %!tidy --input-xml true --indent true --quiet true -<CR>
 autocmd FileType java noremap <buffer> <c-f> mzgg=G`z<CR>
 autocmd FileType sh noremap <buffer> <c-f> mzgg=G`z<CR>
 autocmd FileType todo setlocal completefunc=TodoComplete
