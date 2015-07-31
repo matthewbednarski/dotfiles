@@ -45,7 +45,7 @@ gitconfig_to=~/.gitconfig
 editorconf_to=~/.editorconfig
 antigen_to=~/antigen.zsh
 
-wd=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/files
+wd=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 d=$wd/files
 
 #mutt_from=$d/.muttrc
