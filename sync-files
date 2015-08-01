@@ -78,7 +78,7 @@ sync_from() {
 	eval from=\$${1}_from
 	if [[ ! -f ${from} ]]
 	then
-		cp ${to} $from}
+		cp ${to} ${from}
 	fi
 }
 
