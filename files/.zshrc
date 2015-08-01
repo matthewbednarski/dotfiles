@@ -7,7 +7,7 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/matthewb/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -25,9 +25,9 @@ if [ -f "${HOME}/.bash_functions" ]; then
 fi
 
 
-# if [ -f "${HOME}/.java_envrc" ]; then
-	source "${HOME}/.java7_envrc"
-# fi
+if [ -f "${HOME}/.java_envrc" ]; then
+	source "${HOME}/.java_envrc"
+fi
 #
 # source ~/.svcps1rc
 #

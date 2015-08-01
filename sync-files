@@ -41,6 +41,7 @@ tmuxconf_to=~/tmux-config/
 tmuxline_to=~/.tmuxline.conf
 bashrc_to=~/.bashrc
 zshrc_to=~/.zshrc
+javarc_to=~/.java_envrc
 bash_aliases_to=~/.bash_aliases
 gitconfig_to=~/.gitconfig
 editorconf_to=~/.editorconfig
@@ -57,6 +58,7 @@ tmux_from=$d/.tmux.conf
 tmuxconf_from=$d/tmux-config/
 tmuxline_from=$d/.tmuxline.conf
 zshrc_from=$d/.zshrc
+javarc_from=$d/.java_envrc
 bash_aliases_from=$d/.bash_aliases
 gitconfig_from=$d/.gitconfig
 editorconf_from=$d/.editorconfig
@@ -90,6 +92,7 @@ do_sync_from() {
 	sync_from tmuxline
 	sync_from bashrc
 	sync_from zshrc
+	sync_from javarc
 	sync_from bash_aliases
 	sync_from gitconfig
 	sync_from editorconf
@@ -117,6 +120,7 @@ do_sync_to() {
 	sync_to tmuxline
 	sync_to bashrc
 	sync_to zshrc
+	sync_to javarc
 	sync_to bash_aliases
 	sync_to gitconfig
 	sync_to editorconf
