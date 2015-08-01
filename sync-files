@@ -40,6 +40,7 @@ tmux_to=~/.tmux.conf
 tmuxconf_to=~/tmux-config/
 tmuxline_to=~/.tmuxline.conf
 bashrc_to=~/.bashrc
+zshrc_to=~/.zshrc
 bash_aliases_to=~/.bash_aliases
 gitconfig_to=~/.gitconfig
 editorconf_to=~/.editorconfig
@@ -55,7 +56,7 @@ svcps1rc_from=$d/.svcps1rc
 tmux_from=$d/.tmux.conf
 tmuxconf_from=$d/tmux-config/
 tmuxline_from=$d/.tmuxline.conf
-bashrc_from=$d/.bashrc
+zshrc_from=$d/.zshrc
 bash_aliases_from=$d/.bash_aliases
 gitconfig_from=$d/.gitconfig
 editorconf_from=$d/.editorconfig
@@ -88,6 +89,7 @@ do_sync_from() {
 	sync_from tmuxconf
 	sync_from tmuxline
 	sync_from bashrc
+	sync_from zshrc
 	sync_from bash_aliases
 	sync_from gitconfig
 	sync_from editorconf
@@ -114,6 +116,7 @@ do_sync_to() {
 	sync_to tmuxconf
 	sync_to tmuxline
 	sync_to bashrc
+	sync_to zshrc
 	sync_to bash_aliases
 	sync_to gitconfig
 	sync_to editorconf
