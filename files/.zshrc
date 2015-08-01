@@ -20,10 +20,12 @@ export EDITOR=/usr/bin/vim
 source ~/antigen.zsh
 
 if [ -f "${HOME}/.bash_functions" ]; then
-	source ~/.bash_aliases
 	source "${HOME}/.bash_functions"
 fi
 
+if [ -f "${HOME}/.bash_aliases" ]; then
+	source "${HOME}/.bash_aliases"
+fi
 
 if [ -f "${HOME}/.java_envrc" ]; then
 	source "${HOME}/.java_envrc"

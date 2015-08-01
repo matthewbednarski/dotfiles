@@ -13,9 +13,7 @@ do
 			echo update
 			SYNC_TO=true
 			shift # past argument
-			;;
-		-u|--update)
-			echo update
+			;; -u|--update) echo update
 			SYNC_TO=true
 			shift # past argument
 			;;
@@ -78,11 +76,11 @@ sync_to() {
 sync_from() {
 	eval to=\$${1}_to
 	eval from=\$${1}_from
-	if [[ ! -f ${from} ]]
-	then
-		echo "cp ${to} ${from}"
-		cp ${to} ${from}
-	fi
+	# if [[ ! -f ${from} ]]
+	# then
+	echo "cp ${to} ${from}"
+	cp ${to} ${from}
+	# fi
 }
 
 do_sync_from() {
