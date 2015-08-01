@@ -57,6 +57,7 @@ svcps1rc_from=$d/.svcps1rc
 tmux_from=$d/.tmux.conf
 tmuxconf_from=$d/tmux-config/
 tmuxline_from=$d/.tmuxline.conf
+bashrc_from=$d/.bashrc
 zshrc_from=$d/.zshrc
 javarc_from=$d/.java_envrc
 bash_aliases_from=$d/.bash_aliases
@@ -70,6 +71,7 @@ sync_to() {
 	if [[ ! -d "~/.vim/bundle" ]]; then
 		mkdir -p ~/.vim/bundle
 	fi
+	echo "cp -Rf ${from} ${to}"
 	cp -Rf ${from} ${to}
 }
 
@@ -78,6 +80,7 @@ sync_from() {
 	eval from=\$${1}_from
 	if [[ ! -f ${from} ]]
 	then
+		echo "cp ${to} ${from}"
 		cp ${to} ${from}
 	fi
 }
