@@ -4,4 +4,6 @@ export JAVA_HOME=/usr/lib/jvm/default
 export JDK_HOME=/usr/lib/jvm/default
 export JRE_HOME=/usr/lib/jvm/default-runtime
 
+export PATH=$JAVA_HOME/bin:$PATH
+
 source ~/java/.init-java-env
