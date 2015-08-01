@@ -89,8 +89,8 @@ fi
 if [ -d "${HOME}/solinfo-dev/bin" ] ; then
 	PATH="${HOME}/solinfo-dev/bin:${PATH}"
 fi
-if [ -f "${HOME}/.java7_envrc" ] ; then
-	source "${HOME}/.java7_envrc"
+if [ -f "${HOME}/.java_envrc" ] ; then
+	source "${HOME}/.java_envrc"
 fi
 
 source ~/.svcps1rc
