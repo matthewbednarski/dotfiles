@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/matthew/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 ZSH_THEME="robbyrussell"
 
@@ -27,7 +27,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git)
 
 # User configuration
-export PATH="/home/matthew/.gem/ruby/2.2.0/bin:/home/matthew/bin:/usr/lib/hardening-wrapper/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+export PATH="~/.gem/ruby/2.2.0/bin:~/bin:/usr/lib/hardening-wrapper/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
