@@ -24,7 +24,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git mercurial vi-mode vim-interaction)
 
 # User configuration
 export PATH="~/.gem/ruby/2.2.0/bin:~/bin:/usr/lib/hardening-wrapper/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
@@ -68,6 +68,7 @@ export EDITOR=/usr/bin/vim
 # source $ZSH/oh-my-zsh.sh
 source ~/antigen.zsh
 
+
 if [ -f "${HOME}/.bash_functions" ]; then
 	source "${HOME}/.bash_functions"
 fi
@@ -80,6 +81,6 @@ if [ -f "${HOME}/.java_envrc" ]; then
 	source "${HOME}/.java_envrc"
 fi
 
-PROMPT='%{$fg[blue]%}{ %c } \
-%{$fg[green]%}$(git_prompt_info)$(hg_prompt_info)%{$reset_color%} \
-%{$fg[red]%}%(!.#.»)%{$reset_color%} '
+#PROMPT='%{$fg[blue]%}{ %c } \
+#%{$fg[green]%}$(git_prompt_info)$(hg_prompt_info)%{$reset_color%} \
+#%{$fg[red]%}%(!.#.»)%{$reset_color%} '
