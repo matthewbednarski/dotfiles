@@ -92,12 +92,12 @@ do_sync_from() {
 	sync_from tmuxconf
 	sync_from tmuxline
 	sync_from bashrc
-	sync_from zshrc
 	sync_from javarc
 	sync_from bash_aliases
 	sync_from gitconfig
 	sync_from editorconf
 	sync_from antigen
+	sync_from zshrc
 
 	cdold=$(pwd)
 	cd $wd
@@ -120,7 +120,6 @@ do_sync_to() {
 	sync_to tmuxconf
 	sync_to tmuxline
 	sync_to bashrc
-	sync_to zshrc
 	sync_to javarc
 	sync_to bash_aliases
 	sync_to gitconfig
@@ -130,6 +129,11 @@ do_sync_to() {
 		curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > $d/antigen.zsh
 	fi
 	sync_to antigen
+	if [[ ! -d ~/.oh-my-zsh ]]; then
+		echo "Downloading oh-my-zsh-install..."
+		curl -L https://raw.githubusercontent.com/robbyrussell/master/tools/instal.sh | sh
+	fi
+	sync_to zshrc
 }
 
 # init_sync_from
