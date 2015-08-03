@@ -81,6 +81,9 @@ if [ -f "${HOME}/.java_envrc" ]; then
 	source "${HOME}/.java_envrc"
 fi
 
+# a fix for Qt WARNING: X Error: BadDrawable
+export QT_X11_NO_MITSHM=1
+
 #PROMPT='%{$fg[blue]%}{ %c } \
 #%{$fg[green]%}$(git_prompt_info)$(hg_prompt_info)%{$reset_color%} \
 #%{$fg[red]%}%(!.#.»)%{$reset_color%} '

@@ -13,7 +13,8 @@ do
 			echo update
 			SYNC_TO=true
 			shift # past argument
-			;; -u|--update) echo update
+			;; -u|--update) 
+			echo update
 			SYNC_TO=true
 			shift # past argument
 			;;
@@ -131,7 +132,7 @@ do_sync_to() {
 	sync_to antigen
 	if [[ ! -d ~/.oh-my-zsh ]]; then
 		echo "Downloading oh-my-zsh-install..."
-		curl -L https://raw.githubusercontent.com/robbyrussell/master/tools/instal.sh | sh
+		curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 	fi
 	sync_to zshrc
 }
