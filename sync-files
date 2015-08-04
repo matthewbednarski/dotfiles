@@ -31,7 +31,7 @@ do
 done
 
 
-#mutt_to=~/.muttrc
+mutt_dir_to=~/.mutt
 vimrc_to=~/.vimrc
 conkyrc_to=~/.conkyrc
 svcps1rc_to=~/.svcps1rc
@@ -49,7 +49,7 @@ antigen_to=~/antigen.zsh
 wd=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 d=$wd/files
 
-#mutt_from=$d/.muttrc
+mutt_dir_from=$d/.mutt
 vimrc_from=$d/.vimrc
 conkyrc_from=$d/.conkyrc
 svcps1rc_from=$d/.svcps1rc
@@ -64,6 +64,15 @@ gitconfig_from=$d/.gitconfig
 editorconf_from=$d/.editorconfig
 antigen_from=$d/antigen.zsh
 
+sync_dir_to() {
+	eval to=\$${1}_dir_to
+	eval from=\$${1}_dir_from
+	echo "cp -Rf ${from}/* ${to}/"
+	if [[ ! -d ${to} ]]; then
+		mkdir -p ${to}
+	fi
+	cp -Rf ${from}/* ${to}/
+}
 sync_to() {
 	eval to=\$${1}_to
 	eval from=\$${1}_from
@@ -72,6 +81,15 @@ sync_to() {
 	fi
 	echo "cp -Rf ${from} ${to}"
 	cp -Rf ${from} ${to}
+}
+
+sync_dir_from() {
+	eval to=\$${1}_dir_to
+	eval from=\$${1}_dir_from
+	echo "cp ${to} ${from}"
+	cp ${to}/aliases.sh ${from}/
+	cp ${to}/mailcap ${from}/
+	cp -Rf ${to}/mutt-colors-solarized ${from}/
 }
 
 sync_from() {
@@ -85,7 +103,7 @@ sync_from() {
 }
 
 do_sync_from() {
-	# sync_from mutt
+	sync_dir_from mutt
 	sync_from vimrc
 	sync_from conkyrc
 	sync_from svcps1rc
@@ -113,7 +131,7 @@ do_sync_to() {
 	cd $wd
 	git pull origin master
 	cd $cdold
-	# sync_to mutt
+	sync_dir_to mutt
 	sync_to vimrc
 	sync_to conkyrc
 	sync_to svcps1rc

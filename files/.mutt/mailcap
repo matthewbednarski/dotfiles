@@ -1,0 +1,9 @@
+
+image/*; 	qiv %s > /dev/null
+text/plain; vim %s
+text/html; lynx  -dump %s; copiousoutput; nametemplate=%s.html;
+# application/pdf; PDFXCview $(cygpath -w "%s")
+# application/postscript; PDFXCview $(cygpath -w "%s")
+application/pdf; zathura "%s"
+application/postscript; zathura "%s"
+application/vnd.ms-excel*; libreoffice %s

@@ -1,8 +1,8 @@
 
 
-export JAVA_HOME=/usr/lib/jvm/default
-export JDK_HOME=/usr/lib/jvm/default
-export JRE_HOME=/usr/lib/jvm/default-runtime
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export JDK_HOME=/usr/lib/jvm/java-8-openjdk
+export JRE_HOME=/usr/lib/jvm/java-8-openjdk/jre
 
 export PATH=$JAVA_HOME/bin:$PATH
 
