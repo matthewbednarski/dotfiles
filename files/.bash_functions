@@ -50,3 +50,46 @@ gcal-edit () {
 	echo "${@}"
 	gcalcli edit "${@}"
 }
+
+winpath() {
+    if [ ${#} -eq 0 ]; then
+        : skip
+    elif [ -f "$1" ]; then
+        local dirname=$(dirname "$1")
+        local basename=$(basename "$1")
+        echo "$(cd "$dirname" && pwd -W)/$basename" \
+        | sed \
+          -e 's|/|\\|g';
+    elif [ -d "$1" ]; then
+        echo "$(cd "$1" && pwd -W)" \
+        | sed \
+          -e 's|/|\\|g';
+    else
+        echo "$1" \
+        | sed \
+          -e 's|^/\(.\)/|\1:\\|g' \
+          -e 's|/|\\|g'
+    fi
+}
+
+unixpath() {
+    echo "$@" \
+    | sed -r \
+      -e 's/\\/\//g' \
+      -e 's/^([^:]+):/\/\1/'
+}
+
+todo () {
+	local d="$(pwd)"
+	local f=
+	while [[ "$d" != "/" ]];
+	do
+		f=$(find "$d" -maxdepth 1 -mindepth 1 -follow -name "todo.txt")
+		if [ -z "$f" ]; then
+			d="$d/.."
+		else
+			vim "$f"
+			break
+		fi
+	done
+}
