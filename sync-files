@@ -43,6 +43,7 @@ bashrc_to=~/.bashrc
 zshrc_to=~/.zshrc
 javarc_to=~/.java_envrc
 bash_aliases_to=~/.bash_aliases
+bash_functions_to=~/.bash_functions
 gitconfig_to=~/.gitconfig
 editorconf_to=~/.editorconfig
 antigen_to=~/antigen.zsh
@@ -62,6 +63,7 @@ bashrc_from=$d/.bashrc
 zshrc_from=$d/.zshrc
 javarc_from=$d/.java_envrc
 bash_aliases_from=$d/.bash_aliases
+bash_functions_from=$d/.bash_functions
 gitconfig_from=$d/.gitconfig
 editorconf_from=$d/.editorconfig
 antigen_from=$d/antigen.zsh
@@ -130,6 +132,7 @@ do_sync_from() {
 	sync_from bashrc
 	sync_from javarc
 	sync_from bash_aliases
+	sync_from bash_functions
 	sync_from gitconfig
 	sync_from editorconf
 	sync_from antigen
@@ -159,6 +162,7 @@ do_sync_to() {
 	sync_to bashrc
 	sync_to javarc
 	sync_to bash_aliases
+	sync_to bash_functions
 	sync_to gitconfig
 	sync_to editorconf
 	if [[ ! -f $d/antigen.zsh ]]; then
