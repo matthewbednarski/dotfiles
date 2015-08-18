@@ -96,6 +96,9 @@ sync_dir_from() {
 	eval to=\$${1}_dir_to
 	eval from=\$${1}_dir_from
 	echo "cp ${to} ${from}"
+	if [[ ! -d ${from} ]]; then
+		mkdir -p ${from}
+	fi
 	if [[ ${1} == 'mutt' ]];then
 		cp ${to}/aliases.sh ${from}/
 		cp ${to}/mailcap ${from}/

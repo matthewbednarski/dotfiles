@@ -1,0 +1,24 @@
+#!/bin/sh
+
+token=$( < ~/.github.token)
+filename=$(basename $1)
+desc=$@
+
+function json_escape {
+	echo -n "$( < $1)" | python -c 'import json,sys;print(json.dumps(sys.stdin.read()))'
+}
+data=$(echo "\
+{ \
+  \"description\":\"$desc\", \
+  \"public\":true, \
+  \"files\": { \
+    \"$filename\": { \
+    \"content\": "$(json_escape $1)" \
+    } \
+  } \
+}")
+
+# echo -n $data > tmp.data.json
+# curl -X POST -H "Authorization: token $token" --data @tmp.data.json  https://api.github.com/gists
+curl -X POST -H "Authorization: token $token" --data "$data" https://api.github.com/gists
+
