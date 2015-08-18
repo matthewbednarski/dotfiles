@@ -31,6 +31,7 @@ do
 done
 
 
+bin_dir_to=~/bin
 mutt_dir_to=~/.mutt
 vimrc_to=~/.vimrc
 conkyrc_to=~/.conkyrc
@@ -49,6 +50,7 @@ antigen_to=~/antigen.zsh
 wd=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 d=$wd/files
 
+bin_dir_from=$d/bin
 mutt_dir_from=$d/.mutt
 vimrc_from=$d/.vimrc
 conkyrc_from=$d/.conkyrc
@@ -80,16 +82,27 @@ sync_to() {
 		mkdir -p ~/.vim/bundle
 	fi
 	echo "cp -Rf ${from} ${to}"
+	if [[ ! -d ${to} ]]; then
+		mkdir -p ${to}
+	fi
 	cp -Rf ${from} ${to}
+	if [[ ${1} == 'bin' ]];then
+		chmod +x ${to}/*
+	fi
+
 }
 
 sync_dir_from() {
 	eval to=\$${1}_dir_to
 	eval from=\$${1}_dir_from
 	echo "cp ${to} ${from}"
-	cp ${to}/aliases.sh ${from}/
-	cp ${to}/mailcap ${from}/
-	cp -Rf ${to}/mutt-colors-solarized ${from}/
+	if [[ ${1} == 'mutt' ]];then
+		cp ${to}/aliases.sh ${from}/
+		cp ${to}/mailcap ${from}/
+		cp -Rf ${to}/mutt-colors-solarized ${from}/
+	else 
+		cp -Rf ${to}/* ${from}/
+	fi
 }
 
 sync_from() {
@@ -104,6 +117,7 @@ sync_from() {
 
 do_sync_from() {
 	sync_dir_from mutt
+	sync_dir_from bin
 	sync_from vimrc
 	sync_from conkyrc
 	sync_from svcps1rc
@@ -132,6 +146,7 @@ do_sync_to() {
 	git pull origin master
 	cd $cdold
 	sync_dir_to mutt
+	sync_dir_to bin
 	sync_to vimrc
 	sync_to conkyrc
 	sync_to svcps1rc
