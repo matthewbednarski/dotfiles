@@ -76,6 +76,9 @@ sync_dir_to() {
 		mkdir -p ${to}
 	fi
 	cp -Rf ${from}/* ${to}/
+	if [[ ${1} == 'bin' ]];then
+		chmod +x ${to}/*
+	fi
 }
 sync_to() {
 	eval to=\$${1}_to
@@ -84,14 +87,7 @@ sync_to() {
 		mkdir -p ~/.vim/bundle
 	fi
 	echo "cp -Rf ${from} ${to}"
-	if [[ ! -d ${to} ]]; then
-		mkdir -p ${to}
-	fi
 	cp -Rf ${from} ${to}
-	if [[ ${1} == 'bin' ]];then
-		chmod +x ${to}/*
-	fi
-
 }
 
 sync_dir_from() {
