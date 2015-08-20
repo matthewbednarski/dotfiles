@@ -62,12 +62,17 @@ autoload -Uz compinit
 compinit
 
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.cabal/bin
 
 export EDITOR=/usr/bin/vim
 # source $ZSH/oh-my-zsh.sh
 source ~/antigen.zsh
 
+if [ -d "${HOME}/.cabal" ]; then
+	if [ -d "${HOME}/.cabal/bin" ]; then
+		export PATH=$PATH:$HOME/.cabal/bin
+	fi
+fi
 
 if [ -f "${HOME}/.bash_functions" ]; then
 	source "${HOME}/.bash_functions"
@@ -85,5 +90,5 @@ fi
 export QT_X11_NO_MITSHM=1
 
 #PROMPT='%{$fg[blue]%}{ %c } \
-#%{$fg[green]%}$(git_prompt_info)$(hg_prompt_info)%{$reset_color%} \
-#%{$fg[red]%}%(!.#.»)%{$reset_color%} '
+	#%{$fg[green]%}$(git_prompt_info)$(hg_prompt_info)%{$reset_color%} \
+	#%{$fg[red]%}%(!.#.»)%{$reset_color%} '

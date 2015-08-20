@@ -4,7 +4,7 @@
 #
 # A script for publishing gists to github
 # 
-# requires that you create a file ~/.github.token containing an personal access token for publishing gists (https://github.com/settings/tokens)
+# requires that you create a file ~/.github.gist.token containing an personal access token for publishing gists (https://github.com/settings/tokens)
 # 
 # usage: 
 #     gist example.js all other parameters are concatenated for use as the description, other wise the filename is used as the description
@@ -12,7 +12,7 @@
 #
 ###########################################
 
-token=$( < ~/.github.token)
+token=$(jq -r .token ~/.github.gist.token)
 file=$1
 filename=$(basename $1)
 if [[ ! -z "$2" ]]; then

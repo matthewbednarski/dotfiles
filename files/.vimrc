@@ -7,6 +7,8 @@ set wildmenu
 set completeopt=longest,menuone "g:my_vim_dir is used elsewhere in my vim configurations
 let g:my_vim_dir=expand("$HOME/.vim")
 
+set spelllang=it
+
 if has("win16") || has("win32") || has("win64") 
 	"add g:my_vim_dir to the front of the runtimepath 
 	"execute "set rtp^=".g:my_vim_dir
@@ -151,3 +153,11 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 			\ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+let g:markdown_include_jekyll_support=0
+let g:markdown_enable_folding=0
+let g:markdown_enable_mappings=1
+let g:markdown_mapping_switch_status = '<Leader>s'
+let g:markdown_enable_spell_checking=0
+let g:markdown_enable_input_abbreviations=0
+

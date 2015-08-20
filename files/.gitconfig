@@ -48,11 +48,13 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool "vimdiff3"]
 	cmd = vim -f -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
-[credential]
-	helper = wincred
+# [credential]
+# 	helper = wincred
 [mergetool]
 	keeptemporaries = false
 	keepbackups = false
 	prompt = false
 	trustexitcode = false
 
+[credential]
+	helper = cache
