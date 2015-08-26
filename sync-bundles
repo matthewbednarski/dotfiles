@@ -1,9 +1,17 @@
 #!/bin/bash
 
 
+if [[ -f "${1}" ]]; then
+	file=${1}
+else
+	file=~/bin/current-vim-bundles
+fi
+echo -e
+echo "Saving bundles script to $file"
+echo -e
 
 get_bundles() {
-	file=$(pwd)/${1}
+	file=${1}
 	echo "#!/bin/bash" > ${file}
 	echo -e "\n" >> ${file}
 	echo 'mkdir -p ~/.vim/bundle' >> ${file}
@@ -36,8 +44,8 @@ get_bundles() {
 	done
 			echo 'cd $cdold' >> ${file}
 }
-get_bundles ${1}
-chmod +x ${1}
+get_bundles "$file"
+chmod +x "$file"
 
 git_clone() {
 	git clone ${1}
