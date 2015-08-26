@@ -1,0 +1,8 @@
+#!/bin/bash
+
+dir=$(dirname "${BASH_SOURCE[0]}")
+
+if [[ ! -d ~/snippets ]]; then
+	mkdir -p ~/snippets
+fi
+cp -f $1 ~/snippets/
