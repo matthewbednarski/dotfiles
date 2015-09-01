@@ -93,3 +93,32 @@ todo () {
 		fi
 	done
 }
+
+echo-blue () {
+	SWITCH="\e["
+	NORMAL="${SWITCH}0m"
+	YELLOW="${SWITCH}33m"
+	BLUE="${SWITCH}34m"
+	echo -e "${BLUE}$@${NORMAL}"
+}
+echo-yellow () {
+	SWITCH="\e["
+	NORMAL="${SWITCH}0m"
+	YELLOW="${SWITCH}33m"
+	echo -e "${YELLOW}$@${NORMAL}"
+}
+
+echo-green () {
+	SWITCH="\e["
+	NORMAL="${SWITCH}0m"
+	GREEN="${SWITCH}32m"
+	echo -e "${GREEN}$@${NORMAL}"
+}
+echo-red () {
+	SWITCH="\e["
+	NORMAL="${SWITCH}0m"
+	RED="${SWITCH}31m"
+	echo -e "${RED}$@${NORMAL}"
+}
+
+

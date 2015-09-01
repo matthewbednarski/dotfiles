@@ -161,3 +161,6 @@ let g:markdown_mapping_switch_status = '<Leader>s'
 let g:markdown_enable_spell_checking=0
 let g:markdown_enable_input_abbreviations=0
 
+" Consider all .redmine files as Redmine wiki files.
+au BufNewFile,BufRead *.redmine set ft=redminewiki
+au BufNewFile,BufRead *redmine.* set ft=redminewiki
