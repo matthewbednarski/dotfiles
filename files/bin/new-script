@@ -2,6 +2,13 @@
 
 echo -e '#!/bin/bash' > $1
 echo -e  >> $1
+echo -e 'SWITCH="\\e["' >> $1
+echo -e 'NORMAL="${SWITCH}0m"' >> $1
+echo -e 'YELLOW="${SWITCH}33m"' >> $1
+echo -e 'RED="${SWITCH}31m"' >> $1
+echo -e 'GREEN="${SWITCH}32m"' >> $1
+echo -e 'BLUE="${SWITCH}34m"' >> $1
+echo -e  >> $1
 echo -e 'dir=$(dirname "${BASH_SOURCE[0]}")' >> $1
 echo -e "\n" >> $1
 chmod +x $1
