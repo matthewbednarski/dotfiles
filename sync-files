@@ -32,6 +32,7 @@ done
 
 
 bin_dir_to=~/bin
+templates_dir_to=~/templates
 mutt_dir_to=~/.mutt
 vimrc_to=~/.vimrc
 conkyrc_to=~/.conkyrc
@@ -52,6 +53,7 @@ wd=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 d=$wd/files
 
 bin_dir_from=$d/bin
+templates_dir_from=$d/templates
 mutt_dir_from=$d/.mutt
 vimrc_from=$d/.vimrc
 conkyrc_from=$d/.conkyrc
@@ -119,6 +121,7 @@ sync_from() {
 do_sync_from() {
 	sync_dir_from mutt
 	sync_dir_from bin
+	sync_dir_from templates
 	sync_from vimrc
 	sync_from conkyrc
 	sync_from svcps1rc
@@ -149,6 +152,7 @@ do_sync_to() {
 	cd $cdold
 	sync_dir_to mutt
 	sync_dir_to bin
+	sync_dir_to templates
 	sync_to vimrc
 	sync_to conkyrc
 	sync_to svcps1rc
