@@ -84,3 +84,8 @@ bower_components/
 #.hg/
 .git/
 .cvs/
+
+# Markup/Markdown intermediary #
+################################
+*.textile
+README*html
