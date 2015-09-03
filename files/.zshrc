@@ -73,6 +73,11 @@ if [ -d "${HOME}/.cabal" ]; then
 		export PATH=$PATH:$HOME/.cabal/bin
 	fi
 fi
+if [ -d "${HOME}/node_modules" ]; then
+	if [ -d "${HOME}/node_modulesl/.bin" ]; then
+		export PATH=$PATH:$HOME/node_modules/.bin
+	fi
+fi
 
 if [ -f "${HOME}/.bash_functions" ]; then
 	source "${HOME}/.bash_functions"
