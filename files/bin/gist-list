@@ -1,0 +1,27 @@
+#!/bin/sh
+
+###########################################
+#
+# A script for publishing gists to github
+# 
+# requires that you create a file ~/.github.gist.token containing an personal access token for publishing gists (https://github.com/settings/tokens)
+# 
+# usage: 
+#     gist-list example.json
+# 
+#
+###########################################
+
+token=$(jq -r .token ~/.github.gist.token)
+GLOBIGNORE="*"
+
+contents=$(curl -s -X GET -H "Authorization: token $token" https://api.github.com/gists)
+if [[ "$1" == "" ]]; then
+	echo $contents
+else
+	outfile=$1
+	contents=$(echo $contents | jq '.' ) 
+	echo $contents > "${outfile}"
+fi
+
+

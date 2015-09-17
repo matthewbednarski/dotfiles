@@ -7,7 +7,7 @@
 # requires that you create a file ~/.github.gist.token containing an personal access token for publishing gists (https://github.com/settings/tokens)
 # 
 # usage: 
-#     gist example.js all other parameters are concatenated for use as the description, other wise the filename is used as the description
+#     gist example.js [another-file.css] all other parameters are concatenated for use as the description, other wise the filename is used as the description
 # 
 #
 ###########################################
@@ -29,13 +29,11 @@ done
 file=""
 filename=""
 desc=$@
-# echo $desc
 function json_escape {
 	echo -n "$( < $1)" | python -c 'import json,sys;print(json.dumps(sys.stdin.read()))'
 }
 files_txt=""
 for i in $(seq 1 $num); do
-	echo hi $i
 	fl="file_$i"
 	flnm="filename_$i"
 	filename="${!flnm}"
