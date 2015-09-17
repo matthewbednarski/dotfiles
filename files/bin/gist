@@ -13,28 +13,54 @@
 ###########################################
 
 token=$(jq -r .token ~/.github.gist.token)
-file=$1
-filename=$(basename $1)
-if [[ ! -z "$2" ]]; then
-	shift
-fi
-desc=$@
-
 GLOBIGNORE="*"
+
+num=0
+file=$1
+while [[ -f "$file" ]]; do
+	((num++))
+	declare "file_$num=$file"
+	declare "filename_$num=$(basename $1)"
+	flnm="filename_$num"
+	echo ${!flnm}
+	shift
+	file=$1
+done
+file=""
+filename=""
+desc=$@
+# echo $desc
 function json_escape {
 	echo -n "$( < $1)" | python -c 'import json,sys;print(json.dumps(sys.stdin.read()))'
 }
-data=$(echo "\
-{ \
-  \"description\":\"$desc\", \
-  \"public\":true, \
-  \"files\": { \
-    \"$filename\": { \
-    \"content\": $(json_escape $file) \
-    } \
-  } \
-}")
-echo "$data"
+files_txt=""
+for i in $(seq 1 $num); do
+	echo hi $i
+	fl="file_$i"
+	flnm="filename_$i"
+	filename="${!flnm}"
+	file="${!fl}"
+	if [[ "$i" == "$num" ]]; then
+		files_txt=$files_txt$(echo "\"$filename\": { \
+			\"content\": $(json_escape $file) \
+		}")
+	else
+		files_txt=$files_txt$(echo "\"$filename\": { \
+			\"content\": $(json_escape $file) \
+		},")
+	fi
+	file=""
+	filename=""
+done
+
+data=$(echo "{ \
+		\"description\":\"$desc\", \
+		\"public\":true, \
+		\"files\": { \
+			$files_txt \
+		}\
+		}")
+# echo "$data" > test.json
 
 # echo -n $data > tmp.data.json
 # curl -X POST -H "Authorization: token $token" --data @tmp.data.json  https://api.github.com/gists
