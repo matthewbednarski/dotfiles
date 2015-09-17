@@ -20,6 +20,7 @@ if [[ ! -z "$2" ]]; then
 fi
 desc=$@
 
+GLOBIGNORE="*"
 function json_escape {
 	echo -n "$( < $1)" | python -c 'import json,sys;print(json.dumps(sys.stdin.read()))'
 }
@@ -29,10 +30,11 @@ data=$(echo "\
   \"public\":true, \
   \"files\": { \
     \"$filename\": { \
-    \"content\": "$(json_escape $file)" \
+    \"content\": $(json_escape $file) \
     } \
   } \
 }")
+echo "$data"
 
 # echo -n $data > tmp.data.json
 # curl -X POST -H "Authorization: token $token" --data @tmp.data.json  https://api.github.com/gists
