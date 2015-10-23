@@ -5,31 +5,101 @@
 # some arguments don't have a corresponding value to go with it such
 # as in the --default example).
 # note: if this is set to > 0 the /etc/hosts part is not recognized ( may be a bug )
+unset SYNC_TO SYNC_FROM DO_USAGE
+
 while [[ $# > 0 ]]
 do
 	key="$1"
 	case $key in
-		-i|--install)
+		-i|--install|i|install)
 			echo update
-			SYNC_TO=true
+			SYNC_TO=1
 			shift # past argument
-			;; -u|--update) 
+			;; 
+		-u|--update|u|update) 
 			echo update
-			SYNC_TO=true
+			SYNC_TO=1
 			shift # past argument
 			;;
-		-c|--commit)
+		-c|--commit|c|commit)
 			echo commit
-			SYNC_FROM=true
+			SYNC_FROM=1
+			shift # past argument
+			;;
+		-h|--help|h|help)
+			DO_USAGE=1
 			shift # past argument
 			;;
 		*)
-			# unknown option
+			if [[ "$ARGS" == "" ]]; then ARGS="$1"; else ARGS="$ARGS $1"; fi;
 			;;
 	esac
 	shift # past argument or value
 done
 
+SWITCH="\e["
+NORMAL="${SWITCH}0m"
+YELLOW="${SWITCH}33m"
+RED="${SWITCH}31m"
+GRN="${SWITCH}32m"
+BLU="${SWITCH}34m"
+	
+function debug {
+	if (( DO_VERBOSE )); then
+		local text="$(gettext "$@")"
+		local ret=$(echo $text | grep "gettext:" ; echo $?)
+		if [[ "$ret" != "0" ]];then
+			text="$@"
+		fi
+		if (( NO_COLOR )); then
+			echo -e "$text"
+		else
+			echo -e "$YELLOW"$text"$NORMAL"
+		fi
+	fi
+}
+function warn {
+	if (( NO_COLOR )); then
+		echo -e "$(gettext "$@")"
+	else
+		echo -e "$YELLOW$(gettext "$@")$NORMAL"
+	fi
+}
+function info {
+	if (( NO_COLOR )); then
+		echo -e "$(gettext "$@")"
+	else
+		echo -e "$(gettext "$@")$NORMAL"
+	fi
+}
+function green {
+	if (( NO_COLOR )); then
+		echo -e "$(gettext "$@")"
+	else
+		echo -e "$GRN$(gettext "$@")$NORMAL"
+	fi
+}
+function error {
+	if (( NO_COLOR )); then
+		echo -e "$(gettext "$@")" >&2
+	else
+		echo -e "$RED$(gettext "$@")$NORMAL" >&2
+	fi
+}
+
+usage (){
+	echo -e
+	info "Usage: $(basename ${BASH_SOURCE[0]}) [OPTIONS] [ARGS]:"
+	echo -e
+	info "  Options:"
+	info "    --commit, commit                 send modified/new files to remote repo"
+	info "    --install, install               install/update files locally from remote repo"
+	info "    -h, -?, --help, help             print usage"
+}
+if (( DO_USAGE )); then
+	usage
+	exit 0
+fi
 
 bin_dir_to=~/bin
 template_dir_to=~/template
@@ -178,12 +248,12 @@ do_sync_to() {
 }
 
 # init_sync_from
-if [[ $SYNC_FROM ]]; then
+if (( SYNC_FROM )); then
 	echo "Syncing from..."
 	do_sync_from
 
 fi
-if [[ $SYNC_TO ]]; then
+if (( SYNC_TO )); then
 	echo "Syncing to..."
 	do_sync_to
 fi

@@ -122,3 +122,11 @@ echo-red () {
 }
 
 
+_cdnjs (){
+	wget -qO- https://api.cdnjs.com/libraries/$1
+}
+search-cdnjs (){
+	local results=$(wget -qO- https://api.cdnjs.com/libraries\?search\=$@\&fields\=version,description,assets )
+	local keys=$(echo -n $results | jq -r '.results[].name' )
+	echo $keys | sort | grep -i "$@"
+}
