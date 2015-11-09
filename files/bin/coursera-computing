@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gcal-coursera-time "@home +computing +study"

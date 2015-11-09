@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ "" == "$1" ]] && [[ "" == "$2" ]]; then
+	jmx=9010
+	debug=8787
+elif [[ "" == "$2" ]]; then
+	jmx=$1
+	debug=8787
+else
+	jmx=$1
+	debug=$2
+fi
+# export JAVA_OPTS=$(
+opts=$(echo '-Djavax.management.builder.initial= -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port='$jmx' -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address='$debug)
+echo "Setting JAVA_OPTS=$opts"
+export JAVA_OPTS=$opts
+export _JAVA_OPTIONS=$opts 

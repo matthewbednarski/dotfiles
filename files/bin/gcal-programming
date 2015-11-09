@@ -1,0 +1,9 @@
+#!/bin/bash
+
+gcalcli --calendar 'Matthew Bednarski' \
+		--title "$1" \
+		--when now \
+		--duration 30 \
+		--description "$@" \
+		--reminder 0 \
+		add

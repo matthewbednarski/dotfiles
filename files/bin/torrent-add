@@ -1,0 +1,37 @@
+#!/bin/bash
+
+SWITCH="\e["
+NORMAL="${SWITCH}0m"
+YELLOW="${SWITCH}33m"
+RED="${SWITCH}31m"
+GREEN="${SWITCH}32m"
+BLUE="${SWITCH}34m"
+
+dir=$(dirname "${BASH_SOURCE[0]}")
+
+
+source ~/.bash_functions
+#{
+#	"method":"torrent-add",
+#	"arguments":{
+#		"paused":false,
+#		"download-dir":"/media/matthew/data/videos",
+#       "filename":"magnet:?xt=urn:btih:67458fedfc85245fb778e6c7768417c7645ac83f&dn=Tosh.0.S07E26.HDTV.x264-MiNDTHEGAP[eztv].mp4%5Beztv%5D&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969"
+#	}
+#}
+file=$1
+prefile=$(echo $file | sed 's/\(http\:\/\/torrentproject\.se\/torrent\/\)\([a-zA-Z0-9]\+\)\(\.torrent\)/\1/g')
+hashfile=$(echo $file | sed 's/\(http\:\/\/torrentproject\.se\/torrent\/\)\([a-zA-Z0-9]\+\)\(\.torrent\)/\L\2/g'| awk '{print toupper($0)}')
+suffix=$(echo $file | sed 's/\(http\:\/\/torrentproject\.se\/torrent\/\)\([a-zA-Z0-9]\+\)\(\.torrent\)/\3/g')
+file=$prefile$hashfile$suffix
+data=$(echo "{ \
+		\"method\":\"torrent-add\", \
+		\"arguments\": { \
+		   \"paused\":false,
+		\"download-dir\":\"/media/matthew/data/videos\",
+       \"filename\":\"$file\"
+		}\
+		}")
+# echo $data
+header=$(curl --silent -X POST --data "$data" http://home-central/transmission/rpc | grep  "X-Transmission-Session-Id\:" | sed 's/.*X-Transmission-Session-Id: \(.*\)<\/code.*/\1/g')
+curl --silent -X POST --data "$data" --Header "X-Transmission-Session-Id: $header" http://home-central/transmission/rpc | jq '.'
