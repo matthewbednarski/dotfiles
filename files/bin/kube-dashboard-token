@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+k8suser=$1
+if [[ "$1" == "" ]]; then
+    k8suser=kube-system
+fi
+# echo -n "$decode" | base64 -D | pbcop
+token='.*-token-.*' # token='deployment-controller-token-'
+secret=$(kubectl -n kube-system get secret | grep "$token" -m1 | awk '{print $1}')
+kubectl -n kube-system describe secret $secret | grep "token: " | awk '{print $2}' 

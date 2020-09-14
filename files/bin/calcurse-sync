@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+SWITCH="\e["
+NORMAL="${SWITCH}0m"
+YELLOW="${SWITCH}33m"
+RED="${SWITCH}31m"
+GREEN="${SWITCH}32m"
+BLUE="${SWITCH}34m"
+
+dir=$(dirname "${BASH_SOURCE[0]}")
+
+calcurse_dir=$HOME/.calcurse
+
+temp_file=$(mktemp)
+curl https://outlook.office365.com/owa/calendar/31b13a4c507b4d3781c4e40e3a28c961@aicomp.com/ccfbd71ebe494d28868f223a66c024ee11343077712494965600/calendar.ics -o $temp_file
+
+
+rm $calcurse_dir/apts
+
+/usr/local/bin/calcurse -i $temp_file
+
+rm -f $temp_file
+

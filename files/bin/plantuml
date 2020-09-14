@@ -9,6 +9,8 @@ BLUE="${SWITCH}34m"
 
 dir=$(dirname "${BASH_SOURCE[0]}")
 
-cp ~/template/java-gitignore .gitignore
+set -ie
+
+java -jar /opt/plantuml/plantuml.jar $@
 
 
