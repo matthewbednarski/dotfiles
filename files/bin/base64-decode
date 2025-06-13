@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-decode=$1
-if [[ "$1" == "" ]]; then
-    decode=$(pbpaste)
-fi
-echo -n "$decode" | base64 -D | pbcopy

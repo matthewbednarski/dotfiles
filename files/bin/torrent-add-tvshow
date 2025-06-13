@@ -1,4 +1,0 @@
-#!/bin/bash
-
-source ~/.bash_functions
-search-tvshow-url "$@" | sed -n 1p | xargs torrent-add

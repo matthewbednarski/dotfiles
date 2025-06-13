@@ -1,4 +1,0 @@
-[submodule "tmux-config"]
-	path = tmux-config
-	url = https://github.com/tony/tmux-config.git
-	branch = master

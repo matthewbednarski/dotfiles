@@ -1,7 +1,0 @@
-#!/bin/bash
-
-encode=$1
-if [[ "$1" == "" ]]; then
-    encode=$(pbpaste)
-fi
-echo -n "$encode" | base64 | pbcopy
